@@ -5,3 +5,9 @@
 # VM config files
 *.vbox
 *.vbox-prev
+
+# Ignore ISO
+*.iso
+
+# Ignore Kiesmondzorg
+KiesMondzorg/
