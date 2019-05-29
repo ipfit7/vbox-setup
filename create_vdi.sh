@@ -1,7 +1,20 @@
-# TODO: Implement params here
-diskName="KiesMondzorgVDI.vdi"
-fullPath=$(pwd)/$diskName
-sizeMB=20480
+BASE_PATH=$(pwd)
+VM_NAME="KiesMondzorg"
+VDI_SIZE=20480
+
+while getopts p:n:s: option
+do
+    case "${option}" in
+    p) BASE_PATH=${OPTARG};;
+    n) VM_NAME=${OPTARG};;
+    s) VDI_SIZE=${OPTARG};;
+    esac
+done;
+
+mkdir -p BASE_PATH
+
+DISK_NAME=$VM_NAME"VDI.vdi"
+FULL_PATH=$BASE_PATH/$DISK_NAME
 
 echo "Creating virtual hard disk"
 
@@ -12,10 +25,10 @@ echo "Creating virtual hard disk"
 # TODO: Ask user if we should delete the disk 
 
 # Check if there's previous VDI's on this path
-if vboxmanage list hdds | grep $fullPath --quiet; then
+if vboxmanage list hdds | grep $FULL_PATH --quiet; then
     echo "Deleting existing VDI..."
     # Try and delete them (it's probably us anyways)
-    if VBoxManage closemedium disk $fullPath --delete  > /dev/null 2>&1; then
+    if VBoxManage closemedium disk $FULL_PATH --delete  > /dev/null 2>&1; then
         echo "Deleted VDI";
     else
         echo "Failed deleting VDI. Please detach it from any VM and try again."
@@ -25,4 +38,4 @@ fi
 
 
 # Create the new VDI
-VBoxManage createmedium disk --filename $diskName --size $sizeMB --format VDI --variant Standard
+VBoxManage createmedium disk --filename $FULL_PATH --size $VDI_SIZE --format VDI --variant Standard
