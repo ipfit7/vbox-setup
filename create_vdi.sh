@@ -11,10 +11,10 @@ do
     esac
 done;
 
-mkdir -p BASE_PATH
+mkdir -p BASE_PATH/$VM_NAME
 
 DISK_NAME=$VM_NAME"VDI.vdi"
-FULL_PATH=$BASE_PATH/$DISK_NAME
+FULL_PATH=$BASE_PATH/$VM_NAME/$DISK_NAME
 
 echo "Creating virtual hard disk"
 

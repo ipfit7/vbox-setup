@@ -12,8 +12,11 @@ done;
 FULL_PATH=$BASE_PATH/$VM_NAME
 OS_TYPE='Debian_64'
 
-if [ ! -f $FULL_PATH".vbox" ]; then
+VBOX_PATH=$FULL_PATH/$VM_NAME".vbox"
+
+if [ -f $VBOX_PATH ]; then
     echo "VM Already exists. Aborting..."
+    echo "Path checked: "$VBOX_PATH
     exit 1
 fi
 
@@ -28,4 +31,8 @@ echo "Attaching previously generated storage medium to the VM..."
 vboxmanage storageattach $VM_NAME --storagectl mainHDD --port 1 --type hdd --medium $BASE_PATH/$VM_NAME"VDI.vdi"
 
 # Set some custom branding
-VBoxManage modifyvm $VM_NAME --iconfile $(pwd)/res/kies-vm-icon.png
+mkdir -p $BASE_PATH/branding
+cp ./res/kies-vm-icon.png $BASE_PATH/$VM_NAME/branding/kies-vm-icon.png
+cp ./res/logo.bmp $BASE_PATH/$VM_NAME/branding/logo.bmp
+
+VBoxManage modifyvm $VM_NAME --iconfile $BASE_PATH/branding/kies-vm-icon.png
