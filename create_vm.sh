@@ -11,3 +11,6 @@ echo "Creating storage controller for the new VM..."
 vboxmanage storagectl $name --name mainHDD --controller IntelAhci --add sata --bootable on --portcount 1
 echo "Attaching previously generated storage medium to the VM..."
 vboxmanage storageattach $name --storagectl mainHDD --port 1 --type hdd --medium $fullpath/KiesMondzorgVDI.vdi
+
+# Set some custom branding
+VBoxManage modifyvm $name --iconfile $(pwd)/res/kies-vm-icon.png
