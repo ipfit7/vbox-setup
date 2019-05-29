@@ -1,3 +1,7 @@
 
 # Virtual hard disks 
 *.vdi
+
+# VM config files
+*.vbox
+*.vbox-prev
