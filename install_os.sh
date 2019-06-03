@@ -24,4 +24,21 @@ if [ ! -f guest_additions.iso ]; then
 fi;
 
 # Configure the unattended installer
-vboxmanage unattended install $VM_NAME --iso=debian.iso --additions-iso=guest_additions.iso --script-template=./unattended/preseed.cfg --post-install-template=./unattended/post_install.sh --install-additions --hostname=kiesmondzorg.local --start-vm=headless
+vboxmanage modifyvm $VM_NAME --cpus=2 --memory=2048
+vboxmanage unattended install $VM_NAME --iso=debian.iso --additions-iso=guest_additions.iso --script-template=./unattended/preseed.cfg --post-install-template=./unattended/post_install.sh --install-additions --hostname=kiesmondzorg.local --start-vm=gui
+
+keystrokes () {
+    vboxmanage controlvm $VM_NAME keyboardputscancode $1
+    sleep .05
+    vboxmanage controlvm $VM_NAME keyboardputscancode f0 $1
+}
+
+echo "Sending keystrokes..."
+for i in {1..10}
+do
+   keystrokes "17"
+   sleep .5
+done;
+
+echo "Trying to press enter"
+keystrokes "1C"
