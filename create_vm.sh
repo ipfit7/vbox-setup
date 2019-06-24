@@ -28,7 +28,7 @@ echo "Creating storage controller for the new VM..."
 vboxmanage storagectl $VM_NAME --name mainHDD --controller IntelAhci --add sata --bootable on --portcount 1
 
 echo "Attaching previously generated storage medium to the VM..."
-vboxmanage storageattach $VM_NAME --storagectl mainHDD --port 1 --type hdd --medium $BASE_PATH/$VM_NAME"VDI.vdi"
+vboxmanage storageattach $VM_NAME --storagectl mainHDD --port 1 --type hdd --medium $BASE_PATH/$VM_NAME/$VM_NAME"VDI.vdi"
 
 # Set some custom branding
 mkdir -p $BASE_PATH/branding
