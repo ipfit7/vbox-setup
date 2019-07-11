@@ -31,8 +31,8 @@ echo "Attaching previously generated storage medium to the VM..."
 vboxmanage storageattach $VM_NAME --storagectl mainHDD --port 1 --type hdd --medium $BASE_PATH/$VM_NAME/$VM_NAME"VDI.vdi"
 
 # Set some custom branding
-mkdir -p $BASE_PATH/branding
+mkdir -p $BASE_PATH/$VM_NAME/branding
 cp ./res/kies-vm-icon.png $BASE_PATH/$VM_NAME/branding/kies-vm-icon.png
 cp ./res/logo.bmp $BASE_PATH/$VM_NAME/branding/logo.bmp
 
-VBoxManage modifyvm $VM_NAME --iconfile $BASE_PATH/branding/kies-vm-icon.png
+VBoxManage modifyvm $VM_NAME --iconfile $BASE_PATH/$VM_NAME/branding/kies-vm-icon.png
